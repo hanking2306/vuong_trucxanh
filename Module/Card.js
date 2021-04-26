@@ -36,7 +36,7 @@ export class Card extends Node {
     }
 
     _initCover() {
-        var cover = new Sprite("../img/cover.jpeg");
+        var cover = new Sprite("./img/cover.jpeg");
         cover.width = 200;
         cover.height = 200;
         cover.elm.node = this;
