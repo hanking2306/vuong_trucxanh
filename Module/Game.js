@@ -70,7 +70,7 @@ export class Game extends Node {
         let arrCard = [];
         let positionX = 320;
         let positionY = 70;
-        const đivineCarđ = new Audio("./img/phatbai.mp3");
+        const divineCard = new Audio("./img/phatbai.mp3");
         let linetime = gsap.timeline();
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 5; j++) {
@@ -92,13 +92,13 @@ export class Game extends Node {
         }
         for(let i = arrCard.length - 1; i >= 0; i--){
             linetime.to(arrCard[i], {duration: 0.4, ease: "back.out(4)", x : positionX, y: positionY, zIndex: 20 - index});
+            divineCard.play();
             positionX += 200;
             if(positionX >= (arrCard[i].width*6 + 320)){
                 positionX = 320;
                 positionY += 200;
             }
         }
-        đivineCarđ.play();
         new Promise(resolve => setTimeout(resolve, 6000)).then(()=>{
             this._isClick = true;
         }); 
