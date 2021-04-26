@@ -66,7 +66,11 @@ export class Game extends Node {
 
     _elementCard() {
         let arrRandom = [];
-        let index = 1;
+        let index = 20;
+        let arrCard = [];
+        let positionX = 320;
+        let positionY = 70;
+        const đivineCarđ = new Audio("../img/phatbai.mp3");
         let linetime = gsap.timeline();
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 5; j++) {
@@ -79,13 +83,22 @@ export class Game extends Node {
                 const card = new Card(listCard[randomCard].src, index, listCard[randomCard].value);
                 card.x = 720;
                 card.y = 370;
+                arrCard.push(card);
                 card.zIndex = 99;
-                linetime.to(card, {duration: 0.4, ease: "back.out(4)", x: j * 200 + 320, y: i * 200 + 70, zIndex:  20 - index});
                 this.addChild(card);
-                index++;
+                index--;
                 card.onClick("mousedown", this.onClickCard.bind(this));
             }
         }
+        for(let i = arrCard.length - 1; i >= 0; i--){
+            linetime.to(arrCard[i], {duration: 0.4, ease: "back.out(4)", x : positionX, y: positionY, zIndex: 20 - index});
+            positionX += 200;
+            if(positionX >= (arrCard[i].width*6 + 320)){
+                positionX = 320;
+                positionY += 200;
+            }
+        }
+        đivineCarđ.play();
         new Promise(resolve => setTimeout(resolve, 6000)).then(()=>{
             this._isClick = true;
         }); 
@@ -171,15 +184,13 @@ export class Game extends Node {
     }
     
     _initStartGame() {
-        const startGame = new Sprite("../img/StartGame.png");
+        const startGame = new Sprite("./img/StartGame.png");
         this.setUpSprite(startGame, 350, 100, 900, 750, true);
         this.addChild(startGame);
         startGame.onClick("mousedown", this.onPlayGame.bind(this));
     }
     
     onPlayGame(evt) {
-        const đivineCarđ = new Audio("../img/phatbai.mp3");
-        đivineCarđ.play();
         evt.target.style.display = 'none';
         this._elementCountScore();
         this._elementScore();
@@ -189,8 +200,8 @@ export class Game extends Node {
     }
     
     _elementGameOver() {
-        const gameOver = new Sprite("../img/game-over.jpeg");
-        const loseMusic = new Audio("../img/tf_nemesis.mp3");
+        const gameOver = new Sprite("./img/game-over.jpeg");
+        const loseMusic = new Audio("./img/tf_nemesis.mp3");
         this.setUpSprite(gameOver, 350, 90, 950, 750, false);
         this.addChild(gameOver);
         if (this.score <= 0) {
@@ -200,8 +211,8 @@ export class Game extends Node {
             }
             loseMusic.play();
         }
-        const winner = new Sprite("../img/winner.jpeg");
-        const winMusic = new Audio("../img/win.mp3");
+        const winner = new Sprite("./img/winner.jpeg");
+        const winMusic = new Audio("./img/win.mp3");
         this.setUpSprite(winner, 525, 200, 600, 400, false);
         this.addChild(winner);
         if (this._math === 10) {
@@ -211,7 +222,7 @@ export class Game extends Node {
     }
 
     _initRestartGame() {
-        const reStartGame = new Sprite("../img/replay.png");
+        const reStartGame = new Sprite("./img/replay.png");
         this.setUpSprite(reStartGame, 1400, 350, 200, 200, true);
         this.addChild(reStartGame);
         reStartGame.onClick("mousedown", this.onRePlayGame.bind(this));
