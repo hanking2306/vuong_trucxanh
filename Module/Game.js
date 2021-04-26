@@ -4,10 +4,10 @@ import { Card } from "./Card.js";
 import { Label } from "../Lib/Label.js";
 
 var listCard = [];
-var clickSound = new Audio("../img/click.mp3");
+var clickSound = new Audio("./img/click.mp3");
 for (let i = 0; i < 10; i++) {
     listCard.push({
-        src: "../img/pokemon" + i + ".png",
+        src: "./img/pokemon" + i + ".png",
         value: i,
         available: 2,
     })
@@ -26,7 +26,7 @@ export class Game extends Node {
         this._isClick = false;
     }
     _elementBackground() {
-        const bg = new Sprite("../img/trucxanh_bg.jpg");
+        const bg = new Sprite("./img/trucxanh_bg.jpg");
         bg.width = 1650;
         bg.height = 950;
         this.addChild(bg);
@@ -70,7 +70,7 @@ export class Game extends Node {
         let arrCard = [];
         let positionX = 320;
         let positionY = 70;
-        const đivineCarđ = new Audio("../img/phatbai.mp3");
+        const đivineCarđ = new Audio("./img/phatbai.mp3");
         let linetime = gsap.timeline();
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 5; j++) {
@@ -106,10 +106,10 @@ export class Game extends Node {
 
     onClickCard(evt) {
         let card = evt.target.node;
-        const flipSound = new Audio("../img/flip.mp3");
+        const flipSound = new Audio("./img/flip.mp3");
         clickSound.play();
-        const failChoose = new Audio("../img/bruh.mp3");
-        const rightChoose = new Audio("../img/wow.mp3");
+        const failChoose = new Audio("./img/bruh.mp3");
+        const rightChoose = new Audio("./img/wow.mp3");
         if (this.countClick === 0 && card.isFlip === false && this._isClick === true) {
             this.countClick++;
             this.firstClick = card;
